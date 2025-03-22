@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import dotenv from 'dotenv'
 import  {fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import db from './config/mongoose-connection.js';
@@ -16,13 +17,13 @@ app.use(express.static(__dirname+"/public"));
 app.set("views","views");
 app.set('views engine','ejs');
 app.use(cookieParser());
-
+dotenv.config();
 
 app.use('/owner',ownerRouter);
 app.use('/user',userRouter);
 app.use('/product',productRouter);
 
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("connection establish successfully");
 })
